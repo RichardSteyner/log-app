@@ -1,0 +1,57 @@
+<div>
+    <div>
+        <div class="dropdown" style="float: right;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Acciones
+            </button>
+            <ul class="dropdown-menu">
+              <li *ngIf="log"><button (click)="modificarLog(log)" class="dropdown-item" type="button">Modificar</button></li>
+              <li *ngIf="log && canDelete"><button (click)="eliminarLog(log)" class="dropdown-item" type="button">Eliminar</button></li>
+            </ul>
+        </div>
+    </div>
+
+    <h2><a [routerLink]="['/logs']">Logs</a> &gt; <span *ngIf="log">{{log.titulo}}</span></h2>
+    
+    <div *ngIf="log">
+        <p class="icon">{{log.tipo}} - {{log.detalleTipo}}</p>
+        
+        <div class="row mb-2">
+            <div class="col">
+                <div class="card w-100 celeste">
+                    <div class="card-body">
+                        <h5 class="card-title title">Descripción</h5>
+                        <p class="card-text">{{log.descripcion}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card w-100 celeste">
+                    <div class="card-body">
+                        <h5 class="card-title title">Solución</h5>
+                        <p class="card-text">{{log.solucion}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="log?.codigoClave">
+            <div class="card w-100 celeste">
+                <div class="card-body">
+                    <h5 class="card-title title">Código Ejemplo</h5>
+                    <p class="card-text" [innerHTML]="log.codigoClave">.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mytoast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+
+</div>

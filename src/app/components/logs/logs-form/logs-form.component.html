@@ -1,0 +1,71 @@
+<h1 mat-dialog-title>{{titulo}}</h1>
+
+<div mat-dialog-content>
+    
+    <div class="card bg-dark mb-3">
+        <div class="card-header">
+            <div #errorsave class="alert alert-danger" *ngIf="errorSave">
+                {{errorSave}}
+            </div>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" name="titulo" id="titulo" class="form-control" [(ngModel)]="logModel.titulo">
+                    <!--<div class="alert alert-danger" *ngIf="erroresRecibidosDelBack?.nombres">
+                        {{erroresRecibidosDelBack.nombres}}
+                    </div>-->
+                </div>
+                <div class="form-group">
+                    <label for="tipo">Tipo</label>
+                    <select name="tipo" id="tipo" class="form-control" 
+                        [(ngModel)]="logModel.tipo" [compareWith]="compararTipo">
+                        <option [ngValue]="''">Selecciona un tipo</option>
+                        <option *ngFor="let item of tipoValues" [ngValue]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="detalletipo">Detalle Tipo</label>
+                    <input type="text" name="detalletipo" id="detalletipo" class="form-control" [(ngModel)]="logModel.detalleTipo">
+                    <!--<div class="alert alert-danger" *ngIf="erroresRecibidosDelBack && erroresRecibidosDelBack.email">
+                        {{erroresRecibidosDelBack.email}}
+                    </div>-->
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea rows="3" name="descripcion" id="descripcion" class="form-control" [(ngModel)]="logModel.descripcion"></textarea>
+                    <!--<div class="alert alert-danger" *ngIf="erroresRecibidosDelBack && erroresRecibidosDelBack.email">
+                        {{erroresRecibidosDelBack.email}}
+                    </div>-->
+                </div>
+                <div class="form-group">
+                    <label for="solucion">Solución</label>
+                    <textarea rows="3" name="solucion" id="solucion" class="form-control" [(ngModel)]="logModel.solucion"></textarea>
+                    <!--<div class="alert alert-danger" *ngIf="erroresRecibidosDelBack && erroresRecibidosDelBack.email">
+                        {{erroresRecibidosDelBack.email}}
+                    </div>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="codigoclave">Código Clave</label>
+                    <ckeditor [editor]="editor" style="color: black;" name="codigoclave" [(ngModel)]="logModel.codigoClave"></ckeditor>
+                </div>
+    
+                <!--<div class="form-group">
+                    <button type="button" class="btn btn-primary" (click)="logModel.id ? editar() : crear()">
+                        {{logModel._id ? 'Modificar' : 'Crear'}}
+                    </button>
+                </div>-->
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div mat-dialog-actions>
+    <button type="button" class="btn btn-primary" (click)="logModel._id ? editar() : crear()">
+        {{logModel._id ? 'Modificar' : 'Crear'}}
+    </button>
+    <button type="button" class="btn btn-secondary" [mat-dialog-close]="false">Cancelar</button>
+</div>

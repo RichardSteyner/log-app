@@ -1,0 +1,30 @@
+.my-title {
+    background-color: #49e2bc;
+    font-weight: bold;
+}
+
+.my-search {
+    border: 1px solid #dddbda;
+    border-radius: 0.25rem;
+    transition: border 0.1s linear, background-color 0.1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 0.75rem;
+    line-height: 2rem;
+    font-size: 1rem;
+    width: 15rem;
+  }
+
+  .my-button {
+    border: 1px solid #dddbda;
+    border-radius: 0.25rem;
+    transition: border 0.1s linear, background-color 0.1s linear;
+    font-size: 1rem;
+    float: right;
+    padding: 0 0.5rem 0 0.5rem;
+    line-height: 2rem;
+    cursor: pointer;
+  }
+
+  .list {
+      margin: 10px 10px 10px 10px;
+  }

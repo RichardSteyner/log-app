@@ -1,0 +1,16 @@
+.footer3  {
+    position: relative;
+    bottom: 0px;
+    width:100%;
+    clear: both;
+  }
+
+  .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      background-size: cover;
+  }
+  
