@@ -1,1 +1,1 @@
-export  const BASE_ENDPOINT = 'https://steyner-server-node.herokuapp.com/api';
+export  const BASE_ENDPOINT = 'https://steyner-server-node-production.up.railway.app/api';

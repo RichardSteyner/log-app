@@ -22,8 +22,8 @@ export class LoginService {
   public get usuario(): Usuario | null {
     if (this._usuario != null) {
       return this._usuario;
-    } else if (this._usuario == null && sessionStorage.getItem('usuario') != null) {
-      this._usuario = JSON.parse(sessionStorage.getItem('usuario')!) as Usuario;
+    } else if (this._usuario == null && localStorage.getItem('usuario') != null) {
+      this._usuario = JSON.parse(localStorage.getItem('usuario')!) as Usuario;
       return this._usuario;
     }
     return null;
@@ -32,8 +32,8 @@ export class LoginService {
   public get token(): string | null {
     if (this._token != null) {
       return this._token;
-    } else if (this._token == null && sessionStorage.getItem('token') != null) {
-      this._token = sessionStorage.getItem('token')!;
+    } else if (this._token == null && localStorage.getItem('token') != null) {
+      this._token = localStorage.getItem('token')!;
       return this._token;
     }
     return null;
@@ -84,12 +84,12 @@ export class LoginService {
     this._usuario.email = payload.email;
     this._usuario.username = payload.user_name;
     this._usuario.roles = payload.authorities;*/
-    sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
+    localStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 
   guardarToken(accessToken: string): void {
     this._token = accessToken;
-    sessionStorage.setItem('token', accessToken);
+    localStorage.setItem('token', accessToken);
   }
 
   obtenerDatosToken(accessToken: string | null): any {
@@ -119,8 +119,8 @@ export class LoginService {
   logout(): void {
     this._token = null;
     this._usuario = null;
-    sessionStorage.clear();
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('usuario');
+    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
   }
 }
