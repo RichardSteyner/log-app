@@ -29,12 +29,18 @@ export class AuthGuard implements CanActivate {
   isTokenExpirado(): boolean {
     let token = this.authService.token;
     let payload = this.authService.obtenerDatosToken(token);
-    let now = new Date().getTime() / 1000;
-    console.log(now, payload.exp);
-    if (payload.exp < now) {
+    const now = new Date().getTime();
+    const expireDate = payload.exp * 1000;
+    console.log(this.getDateFromMiliseconds(now));
+    console.log(this.getDateFromMiliseconds(expireDate));
+    if (expireDate < now) {
       return true;
     }
     return false;
+  }
+
+  getDateFromMiliseconds(miliseconds: number): Date {
+    return new Date(miliseconds);
   }
   
 }

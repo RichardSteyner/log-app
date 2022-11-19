@@ -1,4 +1,5 @@
 import { Generic } from './generic';
+import { Usuario } from './usuario';
 export class Log implements Generic {
 
     id?: number = 0;
@@ -9,6 +10,7 @@ export class Log implements Generic {
     descripcion: string = '';
     solucion: string = '';
     codigoClave: string = '';
+    usuario: Usuario = new Usuario();
 
     /*constructor(id: string, titulo: string, tipo: string, detalleTipo: string, descripcion: string, solucion: string, codigoClave: string) {
         this._id = id;

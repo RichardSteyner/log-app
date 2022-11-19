@@ -27,24 +27,22 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    console.log(this.usuario);
     if (!this.usuario.correo || !this.usuario.password) {
       this._snackbar.open('Complete usuario y contraseña por favor.', 'Ok', { duration: 3000 });
       return;
     }
 
     this.authService.login(this.usuario).subscribe( (response: any) => {
-      console.log(response);
 
       this.authService.guardarUsuario(response.usuario);
       this.authService.guardarToken(response.token);
       let usuario = this.authService.usuario;
       this.router.navigate(['/logs']);
-      //swal('Login', `Hola ${usuario.username}, has iniciado sesión con éxito!`, 'success');
+      this._snackbar.open(`Hola ${usuario?.nombre}, has iniciado sesión con éxito!`, 'Ok', { duration: 3000 });
     }, (err: any) => {
       this._snackbar.open('Usuario o clave incorrectas.', 'Ok', { duration: 3000 });
       console.log(err.error);
-    }
+      }
     );
   }
 

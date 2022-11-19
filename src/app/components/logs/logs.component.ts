@@ -3,6 +3,7 @@ import { Log } from '../../models/log';
 import { LogService } from '../../services/log.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LogsFormComponent } from './logs-form/logs-form.component';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-logs',
@@ -13,7 +14,9 @@ export class LogsComponent implements OnInit {
 
   logs: Log[] = [];
 
-  constructor(private service: LogService, public dialog: MatDialog) { }
+  constructor(private service: LogService, 
+    public dialog: MatDialog,
+    public authService: LoginService) { }
 
   ngOnInit(): void {
     /*this.logs.unshift(new Log('1', 'aaaaaaaa', 'aaaaa', 'aaaaaaaaa', ''));
@@ -24,6 +27,10 @@ export class LogsComponent implements OnInit {
     this.cargarLogs();
   }
 
+  public canModify(log: Log): boolean {
+    return this.authService.hasRole('ADMIN_ROLE') || this.authService.usuario?.uid === log?.usuario._id;
+  }
+
   private cargarLogs(): void {
     this.service.listar().subscribe((logsResponse: any) => {
       this.logs = logsResponse.logs;
@@ -31,15 +38,15 @@ export class LogsComponent implements OnInit {
   }
 
   filtrar(event: Event): void {
+    console.log('Filtrar');
     const target = (event.target as HTMLInputElement);
     const filtro = target.value !== undefined ? target.value.trim() : ''
     if(filtro !== '' && filtro.length>1) {
-      console.log(filtro);
       this.service.filtrar(filtro).
                             subscribe( (logsRpta: any) => {
                               this.logs = logsRpta.results;
                             });
-    } else if(this.logs.length === 0) {
+    } else {
       this.cargarLogs();
     }
   }

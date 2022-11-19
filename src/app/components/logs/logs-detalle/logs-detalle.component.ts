@@ -16,7 +16,8 @@ export class LogsDetalleComponent implements OnInit {
 
   log?: Log ;
   id: string = '';
-  canDelete: boolean = false;
+  _canDelete: boolean = false;
+  _canModify: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private logService: LogService,
@@ -26,17 +27,26 @@ export class LogsDetalleComponent implements OnInit {
               public authService: LoginService) { }
 
   ngOnInit(): void {
-    this.canDelete = this.authService.hasRole('ADMIN_ROLE');
     this.route.paramMap.subscribe( (params: any) => {
       this.id = params.get('id');
       this.cargarLog();
     })
   }
 
+  public get canDelete(): boolean {
+    return this.authService.hasRole('ADMIN_ROLE');
+  }
+
+  public get canModify(): boolean {
+    return this.authService.hasRole('ADMIN_ROLE') || this.authService.usuario?.uid === this.log?.usuario._id;
+  }
+
   private cargarLog(): void {
     this.logService.ver(this.id).subscribe( (logRpta: Log) => {
-      this.log = logRpta
-    })
+      this.log = logRpta;
+      console.log(this.log);
+      console.log(this.authService.usuario);
+    });
   }
 
   modificarLog(log: Log): void {
@@ -64,5 +74,7 @@ export class LogsDetalleComponent implements OnInit {
       console.log(errorSolicitud.error);
     });
   }
+
+
 
 }

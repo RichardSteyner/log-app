@@ -1,18 +1,18 @@
 <div>
 
     <div class="list">
-        <input class="my-search" type="search" placeholder="Buscar logs..." (keyup)="filtrar($event)" />
+        <input class="my-search" type="text" placeholder="Buscar logs..." (keyup)="filtrar($event)" />
         <input class="my-button" type="button" value="Nuevo" (click)="nuevoLog()" />
     </div>
 
-    <div *ngFor="let log of logs" class="card mb-2 celeste">
+    <div *ngFor="let log of logs" class="card border-success mb-2 celeste">
         <h5 class="card-header my-title">{{log.titulo | uppercase}}</h5>
         <div class="card-body">
             <h5 class="card-title">{{log.tipo}} - {{log.detalleTipo}}.</h5>
             <p class="card-text">{{log.descripcion}}.</p>
             <div class="text-end">
                 <a [routerLink]="['/logs', log._id]" class="btn btn-primary me-2">Ver</a>
-                <a (click)="modificarLog(log)" class="btn btn-primary">Modificar</a>
+                <a *ngIf="canModify(log)" (click)="modificarLog(log)" class="btn btn-primary">Modificar</a>
             </div>
         </div>
     </div>

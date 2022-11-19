@@ -5,7 +5,7 @@
               Acciones
             </button>
             <ul class="dropdown-menu">
-              <li *ngIf="log"><button (click)="modificarLog(log)" class="dropdown-item" type="button">Modificar</button></li>
+              <li *ngIf="log && canModify"><button (click)="modificarLog(log)" class="dropdown-item" type="button">Modificar</button></li>
               <li *ngIf="log && canDelete"><button (click)="eliminarLog(log)" class="dropdown-item" type="button">Eliminar</button></li>
             </ul>
         </div>
